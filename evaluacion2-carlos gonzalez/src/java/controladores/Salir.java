@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 @WebServlet(name = "Salir", urlPatterns = {"/Salir"})
 public class Salir extends HttpServlet {
 

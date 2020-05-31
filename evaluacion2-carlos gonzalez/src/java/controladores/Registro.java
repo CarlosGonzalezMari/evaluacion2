@@ -1,8 +1,8 @@
-
 package controladores;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import jugadores.Usuario;
+import modelos.Usuario;
 
 
 @WebServlet(name = "Registro", urlPatterns = {"/Registro"})
 public class Registro extends HttpServlet {
 
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
@@ -37,7 +45,7 @@ public class Registro extends HttpServlet {
             response.sendRedirect("registro.jsp?mensaje=Complete todos los campos");
         }
     }
-    private void modificar(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    private void modificar(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException{
         String usuario = request.getParameter("usuario").trim();
         String nombre = request.getParameter("nombre").trim();
         String apellido = request.getParameter("apellido").trim();
@@ -61,15 +69,15 @@ public class Registro extends HttpServlet {
             validado.setPassword(u.getPassword());
             sesion.setAttribute("usuarios", usuarios);
             if(flag==1){
-            response.sendRedirect("principal.jsp?mensaje=Usuario modificado");
+            response.sendRedirect("intranet.jsp?mensaje=Usuario modificado");
             }else{
                 response.sendRedirect("Salir");
             }
         }else{
-            response.sendRedirect("principal.jsp?mensaje=Usuario no existe");
+            response.sendRedirect("intranet.jsp?mensaje=Usuario no existe");
         }
     }
-    private void eliminar(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    private void eliminar(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException{
         String usuario = request.getParameter("usuario").trim();
         Usuario u = new Usuario();
         u.setUsuario(usuario);
@@ -84,13 +92,13 @@ public class Registro extends HttpServlet {
         if(u!=null){
             usuarios.remove(u);
             sesion.setAttribute("usuarios", usuarios);
-            response.sendRedirect("principal.jsp?mensaje=Usuario eliminado");
+            response.sendRedirect("intranet.jsp?mensaje=Usuario eliminado");
         }else{
-            response.sendRedirect("principal.jsp?mensaje=Usuario no existe");
+            response.sendRedirect("intranet.jsp?mensaje=Usuario no existe");
         }
     
     }
-    private void ingresar(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    private void ingresar(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException{
         String usuario = request.getParameter("usuario").trim();
         String nombre = request.getParameter("nombre").trim();
         String apellido = request.getParameter("apellido").trim();
