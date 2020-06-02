@@ -58,96 +58,7 @@
                 </td>
             </tr>
             <tr>
-                <td><input type="text" name="Nombre" value="" /></td>
-                <% try{
-                    Posicion pos = new Posicion(); 
-                    ArrayList<Posicion> posiciones = pos.obtenerJugadores(); 
-                    %>
-                <td>
-                    <select name="posicion">
-                        <% for(Posicion p: posiciones){%>
-                        <option value="<%= p.getClass()%>"> 
-                            <%= p.getNombre() %>
-                        </option>
-                        <% }%>
-                    </select>
-                </td>
-                <%
-                            }catch(Exception e){ 
-                                out.println(e.getMessage());
-                            } %>
-                <% try{
-                    Modelo mo = new Modelo(); 
-                    ArrayList<Modelo> modelos = mo.obtenerModelos(); 
-                    %>
-                <td>
-                    <select name="modelo">
-                        <% for(Modelo m: modelos){%>
-                        <option value="<%= m.getId()%>"> 
-                            <%= m.getNombre() %>
-                        </option>
-                        <% }%>
-                    </select>
-                </td>
-                <%
-                            }catch(Exception e){ 
-                                out.println(e.getMessage());
-                            } %>
-                <td><input type="number" name="hp" value="" /></td>
-                <td><input type="number" name="cc" value="" /></td>
-                <% try{
-                    Usuario usuario = new Usuario(); 
-                    ArrayList<Usuario> usuarios = usuario.obtenerUsuarios(); 
-                    %>
-                <td>
-                    <select name="usuario">
-                        <% for(Usuario us:usuarios){%>
-                        <option value="<%=us.getUsuario()%>"> 
-                            <%= us.getNombre()+" "+us.getApellido() %>
-                        </option>
-                        <% }%>
-                    </select>
-                </td>
-                <%
-                            }catch(Exception e){ 
-                                out.println(e.getMessage());
-                            } %>
-                <td>XXXXXXX</td>
-                <td>
-                    <input type="submit" value="Agregar" />
-                </td>
-                <td>
-                    <a href="Salir">
-                        <input type="button" value="Cerrar Sesion"/>
-                    </a>
-                </td>
-            </tr>
-                
-                
-            
-            <% ArrayList<Vehiculo> vehiculos= new Vehiculo().obtenerVehiculos();
-               
-            for(Vehiculo v:vehiculos){
-            %>
-            <tr>
-                <td><%= v.getPatente()%></td>
-                <td><%= v.getModelo().getMarca().getNombre() %></td>
-                <td><%= v.getModelo().getNombre() %></td>
-                <td><%= v.getHp()%></td>
-                <td><%= v.getCc()%></td>
-                <td><%= v.getUsuario().getNombre()+" "+v.getUsuario().getApellido()  %></td>
-                <td><%= v.getRendimiento()+"km/Lt"%></td>
-                <td><a href="modificarV.jsp?patente=<%=v.getPatente()%>">
-                        <input type="button" value="Modificar" />
-                    </a>
-                        </td>
-                        <td>
-                    <a href="eliminarV.jsp?patente=<%=v.getPatente()%>">
-                        <input type="button" value="Eliminar" />
-                    </a>
-                </td>
-            </tr>
-            <% } %>
+
         </table>
         <input type="hidden" name="accion" value="1"/>
         </form>
@@ -157,7 +68,5 @@
         <%}%>
     </center>
     </body>
-    <% }else{
-    response.sendRedirect("index.jsp?mensaje=acceso denegado");
-    }%>
+
 </html>
